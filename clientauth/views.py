@@ -58,8 +58,8 @@ def login(requested):
     request = respond.dict()
     Email = request['Email']
     Pass = request['Passwd']
-    #authorization = requested.headers["Authorization"]
-    #print ("\n\n", authorization, "\n\n")
+    authorization = requested.headers["Authorization"]
+    print ("\n\n", authorization, "\n\n")
     mycursor.execute("SELECT * FROM Student")
     if (Email):
         for i in mycursor:
