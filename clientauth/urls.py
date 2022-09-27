@@ -10,5 +10,4 @@ urlpatterns = [
     # path('stud/verifytoken/', views.ver, name ='token_verify'),
     path('stud/verifytoken/', jwt_views.TokenVerifyView.as_view(), name ='token'),
     path('stud/register/', views.register, name = 'register'),
-    # path('stud/login/', views.login, name = 'login'),
 ]
