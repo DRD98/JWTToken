@@ -1,13 +1,13 @@
-from sqlite3 import IntegrityError
+#from sqlite3 import IntegrityError
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.decorators import api_view
-import mysql.connector
-from rest_framework_simplejwt import views as jwt_views
+import mysql.connector 
+# from rest_framework_simplejwt import views as jwt_views
 from django.contrib.auth.hashers import make_password, check_password
 
-api_view()
+@api_view()
 
 def dbconnection():
     db1 = mysql.connector.connect(
@@ -17,18 +17,6 @@ def dbconnection():
         database = "db1"
     )
     return db1
-
-@csrf_exempt
-def ver (requested):
-    respond = requested.POST
-    request = respond.dict()
-    kk = jwt_views.TokenVerifyView.as_view()
-    mm = kk(requested)
-    print ("\n\n", mm, "\n\n")
-    #op = {"Output": kk}
-    # return jwt_views.TokenVerifyView.as_view()
-    # msg = {"Status": "Working!"}
-    return JsonResponse(mm, safe = False)
 
 @csrf_exempt
 def register (requested):
@@ -48,9 +36,11 @@ def register (requested):
     finallst = { "POST": "The below data has been inserted.", "Student Name": SName, "Total Marks": Total_Marks, "Student Name": City, "Email": Email, "Passwd": Passwd }
     return JsonResponse( finallst )
 
+@api_view()
 @csrf_exempt
+@permission_classes([IsAuthenticated])
 def login(requested):
-    permission_classes = (IsAuthenticated, )
+    
     flag = 0
     db = dbconnection()
     mycursor = db.cursor()
