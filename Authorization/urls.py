@@ -1,9 +1,10 @@
 from django.urls import path, include
 from clientauth import views
 from rest_framework_simplejwt import views as jwt_views
+import clientauth
 
 urlpatterns = [
-    path('user/', include('clientauth.urls')),
+    path('user/', include('clientauth.urls'), name = 'redirection'),
 
     # path('api/gettoken/', jwt_views.TokenObtainPairView.as_view(), name ='token_obtain_pair'),
     # path('api/login/', jwt_views.TokenObtainPairView.as_view()),
