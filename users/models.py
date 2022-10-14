@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.base_user import BaseUserManager
 # from django.contrib.auth.hashers import make_password
+# from .serializers import UserLoginSerializer
 
 
 class CustomUserManager(BaseUserManager):
@@ -13,7 +14,7 @@ class CustomUserManager(BaseUserManager):
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         extra_fields.setdefault('is_active', True)
-        print("password-------------", password)
+        # print("password-------------", password)
         user.set_password(password)
         user.save()
         return user
